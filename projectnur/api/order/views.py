@@ -9,11 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 def validate_user_session(id, token):
     UserModel = get_user_model()
     try:
-        user = UserModel.objects.get.(pk=id)
+        user = UserModel.objects.get(pk=id)
         if user.session_token == token:
             return True
         return False
-    except UserModel.DoesNotExist
+    except UserModel.DoesNotExist:
         return False
 
 @csrf_exempt
@@ -31,8 +31,8 @@ def add(request, id, token):
         UserModel = get_user_model()
         try:
             user = UserModel.objects.get(pk=id)
-        except UserModel.DoesNotExist
-            return JsonResponse{('error': 'user does not exists')}
+        except UserModel.DoesNotExist:
+            return JsonResponse({'error': 'user does not exists'})
         
         ordr = Order(user=user, product_names=products, total_products=total_pro, transcation_id=transcation_id, total_amount=amount)
         ordr.save()
